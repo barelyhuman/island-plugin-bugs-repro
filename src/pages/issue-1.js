@@ -1,32 +1,31 @@
 import Navigation from '@/components/navigation.js'
 import BaseLayout from '@/layouts/BaseLayout'
-import TimelineItem from '@/components/TimelineItem.island'
-import TimelineItemNonIsland from '@/components/TimelineItem'
+
+import Counter from '@/components/Counter.island'
+import Container from '../components/Container.island'
 
 export function get(req, res) {
   return (
     <BaseLayout title="Home">
       <Navigation />
-      <section>
+      <section class="flex flex-col gap-4">
         <p>
           <strong>Problem</strong>
         </p>
         <p>
-          The 2nd item renders the value when not hydrating but when hydrating
-          the children are deleted (on client side)
+          There are now 2 islands but wrapped wrongly. It's supposed to be the
+          Counter island, wrapping the Container Island and the counter being
+          inside the Container Island. But instead, it's like so
         </p>
+        <pre>{`<island-counter>
+  <div>0</div> <- Isn't supposed to be here
+  <island-container>
+    <div></div> <- Was supposed to populate here and become interactive
+  </island-container>
+</island-counter>`}</pre>
       </section>
-
-      <section>
-        <TimelineItem name="new project"></TimelineItem>
-        <TimelineItem name="issue in this one">
-          <div class="text-zinc-500">{new Date().toLocaleDateString()}</div>
-          <div class="text-zinc-500">{new Date().toLocaleTimeString()}</div>
-        </TimelineItem>
-        <TimelineItemNonIsland name="not an issue when just server rendering">
-          <div class="text-zinc-500">{new Date().toLocaleDateString()}</div>
-          <div class="text-zinc-500">{new Date().toLocaleTimeString()}</div>
-        </TimelineItemNonIsland>
+      <section class="my-2">
+        <Counter />
       </section>
     </BaseLayout>
   )
