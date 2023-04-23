@@ -12,7 +12,7 @@ export function get(req, res) {
         </p>
         <p>
           The 2nd item renders the value when not hydrating but when hydrating
-          the children are deleted
+          the children are deleted (on client side)
         </p>
       </section>
 
