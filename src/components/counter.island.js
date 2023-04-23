@@ -1,5 +1,6 @@
 import { styled } from 'goober'
 import { useState } from 'preact/hooks'
+import Container from './Container.island'
 
 const Button = styled('button')`
   background: #181819;
@@ -16,5 +17,9 @@ const Button = styled('button')`
 
 export default function Counter() {
   const [count, setCount] = useState(0)
-  return <Button onClick={_ => setCount(count + 1)}>{count}</Button>
+  return (
+    <Container>
+      <Button onClick={_ => setCount(count + 1)}>{count}</Button>
+    </Container>
+  )
 }
